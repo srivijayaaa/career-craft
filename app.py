@@ -7,7 +7,6 @@ from PIL import Image
 
 
 # PAGE CONFIG
-
 st.set_page_config(
     page_title="Resume ATS Tracker",
     layout="wide"
@@ -15,7 +14,6 @@ st.set_page_config(
 
 
 # CUSTOM CSS
-
 st.markdown(
 """
 <style>
@@ -104,20 +102,18 @@ unsafe_allow_html=True
 
 
 # LOAD ENV VARIABLES
-
 load_dotenv()
 
 
 # GEMINI CONFIGURATION
-
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
 
 # MODEL
 model = genai.GenerativeModel("gemini-1.5-pro")
 
 
 # GEMINI RESPONSE FUNCTION
-
 def get_gemini_response(input_text):
     try:
         response = model.generate_content(input_text)
@@ -127,7 +123,6 @@ def get_gemini_response(input_text):
 
 
 # PDF TEXT EXTRACTION
-
 def input_pdf_text(uploaded_file):
 
     text = ""
@@ -148,7 +143,6 @@ def input_pdf_text(uploaded_file):
 
 
 # ATS PROMPT
-
 input_prompt = """
 You are an ATS Resume Analyzer.
 
@@ -168,7 +162,6 @@ Provide:
 
 
 # HEADER SECTION
-
 col1, col2 = st.columns([3, 2])
 
 with col1:
@@ -205,11 +198,10 @@ with col2:
         use_container_width=True
     )
 
-st.space(3)
+st.write("")
 
 
 # FEATURES SECTION
-
 col1, col2 = st.columns([3, 2])
 
 with col2:
@@ -227,18 +219,15 @@ with col1:
 
     try:
         img1 = Image.open("images/career image 1.png")
-        #img1 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 1.png")
-        #st.image(img1, use_container_width=True)
         st.image(img1, width=750)
 
     except:
         st.warning("Image 1 not found.")
 
-st.space(3)
+st.write("")
 
 
 # MAIN SECTION
-
 col1, col2 = st.columns([3, 2])
 
 with col1:
@@ -289,17 +278,15 @@ with col2:
 
     try:
         img2 = Image.open("images/career image 2.png")
-        #img2 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 2.png")
         st.image(img2, use_container_width=True)
 
     except:
         st.warning("Image 2 not found.")
 
-st.space(3)
+st.write("")
 
 
 # FAQ SECTION
-
 col1, col2 = st.columns([2, 3])
 
 with col2:
@@ -318,8 +305,6 @@ with col2:
         "with job descriptions and identify matching skills and keywords."
     )
 
-    st.space(1)
-
     st.write(
         "**Q: Can CareerCraft suggest resume improvements?**"
     )
@@ -328,8 +313,6 @@ with col2:
         "A: Yes. It identifies missing keywords and provides suggestions "
         "to improve ATS compatibility."
     )
-
-    st.space(1)
 
     st.write(
         "**Q: Is it suitable for freshers and experienced professionals?**"
@@ -343,7 +326,6 @@ with col1:
 
     try:
         img3 = Image.open("images/career image 3 - Copy.png")
-        #img3 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 3 - Copy.png")
         st.image(img3, use_container_width=True)
 
     except:
