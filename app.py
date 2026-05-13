@@ -5,63 +5,119 @@ import os
 import PyPDF2
 from PIL import Image
 
-# =========================
+
 # PAGE CONFIG
-# =========================
+
 st.set_page_config(
     page_title="Resume ATS Tracker",
     layout="wide"
 )
 
-# =========================
+
 # CUSTOM CSS
-# =========================
+
 st.markdown(
-    """
-    <style>
-        body, .stApp {
-            background-color: #E7F8F1;
-            color: #222222;
-        }
+"""
+<style>
 
-        h1, h2, h3, h4, h5, h6, p, div {
-            color: #222222 !important;
-        }
+/* MAIN BACKGROUND */
+.stApp {
+    background: linear-gradient(135deg, #e7f8f1, #f5f7ff);
+    color: #1f1f1f;
+    font-family: 'Arial', sans-serif;
+}
 
-        .stButton>button {
-            background-color: #1f7a5c;
-            color: white;
-            border-radius: 10px;
-            height: 3em;
-            width: 100%;
-            font-size: 16px;
-        }
+/* HEADINGS */
+h1 {
+    color: #0f3d3e !important;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
 
-        .stButton>button:hover {
-            background-color: #145a43;
-            color: white;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
+h2, h3 {
+    color: #145a43 !important;
+    font-weight: 700;
+}
+
+/* TEXT */
+p, div {
+    color: #2b2b2b !important;
+    line-height: 1.6;
+}
+
+/* BUTTON */
+.stButton>button {
+    background: linear-gradient(135deg, #1f7a5c, #2bb673);
+    color: white;
+    border-radius: 12px;
+    height: 3.2em;
+    width: 100%;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+}
+
+.stButton>button:hover {
+    transform: scale(1.03);
+    background: linear-gradient(135deg, #145a43, #1f7a5c);
+}
+
+/* TEXT AREA */
+.stTextArea textarea {
+    border-radius: 12px;
+    border: 1px solid #cfe8df;
+    background-color: #ffffff;
+}
+
+/* FILE UPLOADER */
+.stFileUploader {
+    background-color: white;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px dashed #1f7a5c;
+}
+
+/* SUCCESS BOX */
+.stSuccess {
+    background-color: #d1f5e0 !important;
+    border-radius: 10px;
+}
+
+/* WARNING BOX */
+.stWarning {
+    background-color: #fff3cd !important;
+    border-radius: 10px;
+}
+
+/* SPACING IMPROVEMENT */
+.block-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+</style>
+""",
+unsafe_allow_html=True
 )
 
-# =========================
+
 # LOAD ENV VARIABLES
-# =========================
+
 load_dotenv()
 
-# =========================
+
 # GEMINI CONFIGURATION
-# =========================
+
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # MODEL
 model = genai.GenerativeModel("gemini-1.5-pro")
 
-# =========================
+
 # GEMINI RESPONSE FUNCTION
-# =========================
+
 def get_gemini_response(input_text):
     try:
         response = model.generate_content(input_text)
@@ -69,9 +125,9 @@ def get_gemini_response(input_text):
     except Exception as e:
         return f"Error: {e}"
 
-# =========================
+
 # PDF TEXT EXTRACTION
-# =========================
+
 def input_pdf_text(uploaded_file):
 
     text = ""
@@ -90,9 +146,9 @@ def input_pdf_text(uploaded_file):
 
     return text
 
-# =========================
+
 # ATS PROMPT
-# =========================
+
 input_prompt = """
 You are an ATS Resume Analyzer.
 
@@ -110,9 +166,9 @@ Provide:
 3. Profile Summary
 """
 
-# =========================
+
 # HEADER SECTION
-# =========================
+
 col1, col2 = st.columns([3, 2])
 
 with col1:
@@ -151,9 +207,9 @@ with col2:
 
 st.space(3)
 
-# =========================
+
 # FEATURES SECTION
-# =========================
+
 col1, col2 = st.columns([3, 2])
 
 with col2:
@@ -170,8 +226,8 @@ with col2:
 with col1:
 
     try:
-        #img1 = Image.open("images/career image 1.png")
-        img1 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 1.png")
+        img1 = Image.open("images/career image 1.png")
+        #img1 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 1.png")
         #st.image(img1, use_container_width=True)
         st.image(img1, width=750)
 
@@ -180,9 +236,9 @@ with col1:
 
 st.space(3)
 
-# =========================
+
 # MAIN SECTION
-# =========================
+
 col1, col2 = st.columns([3, 2])
 
 with col1:
@@ -232,8 +288,8 @@ with col1:
 with col2:
 
     try:
-        #img2 = Image.open("images/career image 2.png")
-        img2 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 2.png")
+        img2 = Image.open("images/career image 2.png")
+        #img2 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 2.png")
         st.image(img2, use_container_width=True)
 
     except:
@@ -241,9 +297,9 @@ with col2:
 
 st.space(3)
 
-# =========================
+
 # FAQ SECTION
-# =========================
+
 col1, col2 = st.columns([2, 3])
 
 with col2:
@@ -286,8 +342,8 @@ with col2:
 with col1:
 
     try:
-        #img3 = Image.open("images/career image 3 - Copy.png")
-        img3 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 3 - Copy.png")
+        img3 = Image.open("images/career image 3 - Copy.png")
+        #img3 = Image.open(r"C:\Users\SHANMUKH\OneDrive\Desktop\ATS RESUME CHECKER\images\images\career image 3 - Copy.png")
         st.image(img3, use_container_width=True)
 
     except:
